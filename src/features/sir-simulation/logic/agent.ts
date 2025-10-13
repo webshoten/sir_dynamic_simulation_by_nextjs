@@ -28,7 +28,20 @@ export class Agent {
     draw(
         c: CanvasRenderingContext2D,
         colors: { S: string; I: string; R: string },
+        infectionRadius?: number,
     ): void {
+        // 感染者の場合、接触半径を薄く表示
+        if (this.state === "I" && infectionRadius) {
+            c.beginPath();
+            c.arc(this.x, this.y, infectionRadius, 0, Math.PI * 2, false);
+            c.strokeStyle = "rgba(255, 100, 100, 0.3)"; // やや濃い赤
+            c.lineWidth = 1.5;
+            c.stroke();
+            c.fillStyle = "rgba(255, 100, 100, 0.1)"; // 薄い赤の塗りつぶし
+            c.fill();
+        }
+
+        // エージェント本体を描画
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         c.fillStyle = colors[this.state] || this.color;
@@ -39,6 +52,7 @@ export class Agent {
         canvas: HTMLCanvasElement,
         c: CanvasRenderingContext2D,
         colors: { S: string; I: string; R: string },
+        infectionRadius?: number,
     ) {
         // 位置を更新
         this.x += this.velocity.x;
@@ -51,6 +65,6 @@ export class Agent {
         if (this.y > canvas.height + this.radius) this.y = -this.radius; //下端
 
         // 描画
-        this.draw(c, colors);
+        this.draw(c, colors, infectionRadius);
     }
 }

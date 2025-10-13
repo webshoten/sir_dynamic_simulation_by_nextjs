@@ -45,7 +45,12 @@ export const useSirAnimation = ({
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             // エージェントを更新
             agents.forEach((agent) => {
-                agent.update(canvas, ctx, store.config.colors);
+                agent.update(
+                    canvas,
+                    ctx,
+                    store.config.colors,
+                    store.config.infectionRadius,
+                );
             });
             // 更新
             if (_tt > 0) {
