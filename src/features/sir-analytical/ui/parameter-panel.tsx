@@ -47,17 +47,17 @@ export function ParameterPanel({ hook }: ParameterPanelProps) {
       {/* 感染率 */}
       <div className="mb-6">
         <label htmlFor={infectionId} className="block text-white mb-2">
-          感染率 (1人1日あたり):{' '}
+          感染率 (%):{' '}
           <span className="font-bold">
-            {parameters.infectionRate.toFixed(2)}
+            {parameters.infectionRate.toFixed(1)}%
           </span>
         </label>
         <input
           type="range"
           id={infectionId}
-          min="0.01"
-          max="0.10"
-          step="0.01"
+          min="0"
+          max="10"
+          step="0.1"
           value={parameters.infectionRate}
           onChange={(e) => setInfectionRate(Number(e.target.value))}
           className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
@@ -104,9 +104,9 @@ export function ParameterPanel({ hook }: ParameterPanelProps) {
 
         <div className="space-y-3">
           <div className="flex items-center justify-between text-white">
-            <span className="text-gray-300">β (感染率):</span>
+            <span className="text-gray-300">β (解析的感染率係数):</span>
             <span className="font-mono font-bold">
-              {coefficients.beta.toFixed(6)}
+              {coefficients.betaAnalytical.toFixed(6)}
             </span>
           </div>
 

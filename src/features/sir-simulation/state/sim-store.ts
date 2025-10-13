@@ -44,10 +44,13 @@ export const useSimStore = create<SimState>((set, get) => ({
     historyMax: 3600,
     config: {
         populationN: 2000,
-        infectionRadius: 15,
-        beta: 0.35,
-        gamma: 0.125,
-        initialInfected: 100,
+        // 接触半径の計算式: r = 0.039 × √(キャンバス面積)
+        // 基準: 面積1,049,760 px²に対してr=40が適切
+        // 40 / √1,049,760 ≈ 0.039
+        infectionRadius: 40,
+        beta: 0.03,
+        gamma: 0.07,
+        initialInfected: 2,
         agentRadius: 10,
         fatality: 0.02,
         colors: {
@@ -62,22 +65,60 @@ export const useSimStore = create<SimState>((set, get) => ({
     cumulativeDeaths: 0,
     reset: ({ width, height }: { width: number; height: number }) => {
         const { config } = get();
-        set({ lastTs: null, simTimeSec: 0, history: [], agents: [] });
+
+        // 接触半径を面積から計算
+        // 計算式: r = 0.039 × √(面積)
+        const area = width * height;
+        const calculatedRadius = 0.039 * Math.sqrt(area);
+        const infectionRadius = Math.round(calculatedRadius);
+
+        const updatedConfig = { ...config, infectionRadius };
+
+        set({
+            lastTs: null,
+            simTimeSec: 0,
+            history: [],
+            agents: [],
+            config: updatedConfig,
+        });
         set({
             agents: createPopulation({
                 width,
                 height,
-                config,
+                config: updatedConfig,
             }),
-            historyMax: config.historyMax,
+            historyMax: updatedConfig.historyMax,
         });
     },
     resetWithConfig: (partial, size) => {
-        set((s) => {
-            const next = { ...s.config, ...partial };
-            return { config: next };
+        const currentConfig = get().config;
+
+        // infectionRadiusが明示的に指定されていない場合は面積から計算
+        let infectionRadius = partial.infectionRadius;
+        if (infectionRadius === undefined) {
+            const area = size.width * size.height;
+            const calculatedRadius = 0.039 * Math.sqrt(area);
+            infectionRadius = Math.round(calculatedRadius);
+        }
+
+        const updatedConfig = { ...currentConfig, ...partial, infectionRadius };
+
+        set({
+            lastTs: null,
+            simTimeSec: 0,
+            history: [],
+            agents: [],
+            config: updatedConfig,
         });
-        get().reset(size);
+
+        set({
+            agents: createPopulation({
+                width: size.width,
+                height: size.height,
+                config: updatedConfig,
+            }),
+            historyMax: updatedConfig.historyMax,
+        });
     },
     setConfig: (partial) =>
         set((s) => {

@@ -2,16 +2,23 @@ import type { SirParameters, SirResult } from "../types/sir-analytical-types";
 
 /**
  * dS/dt = -β * S * I
+ * @param betaAnalytical 解析的モデルの感染率係数（人口スケール）
  */
-function f1(s: number, i: number, beta: number): number {
-    return -1 * beta * s * i;
+function f1(s: number, i: number, betaAnalytical: number): number {
+    return -1 * betaAnalytical * s * i;
 }
 
 /**
  * dI/dt = β * S * I - γ * I
+ * @param betaAnalytical 解析的モデルの感染率係数（人口スケール）
  */
-function f2(s: number, i: number, beta: number, gamma: number): number {
-    return beta * s * i - gamma * i;
+function f2(
+    s: number,
+    i: number,
+    betaAnalytical: number,
+    gamma: number,
+): number {
+    return betaAnalytical * s * i - gamma * i;
 }
 
 /**
@@ -35,8 +42,10 @@ export function solveSIR(params: SirParameters): SirResult {
         dt,
     } = params;
 
-    // β と γ の計算
-    const beta = (infectionRate * contactPerDay) / population;
+    // 計算式:
+    // β_analytical = (感染率/100 × 接触者数) / 人口
+    // γ = 1 / 回復日数
+    const betaAnalytical = ((infectionRate / 100) * contactPerDay) / population;
     const gamma = 1.0 / recoveryDays;
 
     // 初期状態
@@ -59,23 +68,25 @@ export function solveSIR(params: SirParameters): SirResult {
         rArray.push(r);
 
         // k1の計算
-        const k1_s = dt * f1(s, i, beta);
-        const k1_i = dt * f2(s, i, beta, gamma);
+        const k1_s = dt * f1(s, i, betaAnalytical);
+        const k1_i = dt * f2(s, i, betaAnalytical, gamma);
         const k1_r = dt * f3(i, gamma);
 
         // k2の計算
-        const k2_s = dt * f1(s + k1_s / 2.0, i + k1_i / 2.0, beta);
-        const k2_i = dt * f2(s + k1_s / 2.0, i + k1_i / 2.0, beta, gamma);
+        const k2_s = dt * f1(s + k1_s / 2.0, i + k1_i / 2.0, betaAnalytical);
+        const k2_i = dt *
+            f2(s + k1_s / 2.0, i + k1_i / 2.0, betaAnalytical, gamma);
         const k2_r = dt * f3(i + k1_i / 2.0, gamma);
 
         // k3の計算
-        const k3_s = dt * f1(s + k2_s / 2.0, i + k2_i / 2.0, beta);
-        const k3_i = dt * f2(s + k2_s / 2.0, i + k2_i / 2.0, beta, gamma);
+        const k3_s = dt * f1(s + k2_s / 2.0, i + k2_i / 2.0, betaAnalytical);
+        const k3_i = dt *
+            f2(s + k2_s / 2.0, i + k2_i / 2.0, betaAnalytical, gamma);
         const k3_r = dt * f3(i + k2_i / 2.0, gamma);
 
         // k4の計算
-        const k4_s = dt * f1(s + k3_s, i + k3_i, beta);
-        const k4_i = dt * f2(s + k3_s, i + k3_i, beta, gamma);
+        const k4_s = dt * f1(s + k3_s, i + k3_i, betaAnalytical);
+        const k4_i = dt * f2(s + k3_s, i + k3_i, betaAnalytical, gamma);
         const k4_r = dt * f3(i + k3_i, gamma);
 
         // 次の状態を計算
@@ -94,10 +105,11 @@ export function solveSIR(params: SirParameters): SirResult {
 
 /**
  * SIRモデルの係数（β, γ, R₀）を計算
+ * @returns betaAnalytical: 解析的モデルの感染率係数（人口スケール）
  */
 export function calculateCoefficients(
     params: SirParameters,
-): { beta: number; gamma: number; r0: number } {
+): { betaAnalytical: number; gamma: number; r0: number } {
     const {
         population,
         contactPerDay,
@@ -106,10 +118,14 @@ export function calculateCoefficients(
         initialInfected,
     } = params;
 
-    const beta = (infectionRate * contactPerDay) / population;
+    // 計算式:
+    // β_analytical = (感染率/100 × 接触者数) / 人口
+    // γ = 1 / 回復日数
+    // R₀ = S(0) × β / γ
+    const betaAnalytical = ((infectionRate / 100) * contactPerDay) / population;
     const gamma = 1.0 / recoveryDays;
-    const s0 = population - initialInfected;
-    const r0 = (s0 * beta) / gamma;
+    const s0 = population - initialInfected; // S(0) = 初期感受性者数
+    const r0 = (s0 * betaAnalytical) / gamma;
 
-    return { beta, gamma, r0 };
+    return { betaAnalytical, gamma, r0 };
 }

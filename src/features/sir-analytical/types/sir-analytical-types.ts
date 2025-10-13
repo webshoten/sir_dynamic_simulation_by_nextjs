@@ -6,7 +6,7 @@ export interface SirParameters {
     population: number;
     /** 接触者数（1人1日あたり） */
     contactPerDay: number;
-    /** 感染率（1人1日あたり） */
+    /** 感染率（%表記、例: 2 = 2%） */
     infectionRate: number;
     /** 回復までの日数 */
     recoveryDays: number;

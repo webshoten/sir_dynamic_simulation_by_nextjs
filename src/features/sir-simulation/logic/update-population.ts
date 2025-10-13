@@ -9,7 +9,7 @@ export function updatePopulation(
     mainCanvasCtx: CanvasRenderingContext2D,
     config: {
         infectionRadius: number;
-        beta: number;
+        beta: number; // betaAgent: 接触あたりの感染率パラメータ
         gamma: number;
         colors: { S: string; I: string; R: string };
     },
@@ -19,7 +19,12 @@ export function updatePopulation(
 
     const infectionRadius = config.infectionRadius;
     const r2 = infectionRadius * infectionRadius;
-    const pInfect = 1 - Math.exp(-config.beta * dt);
+
+    // 計算式（ポアソン過程からの感染・回復確率）:
+    // P(感染) = 1 - exp(-β_agent × dt)
+    // P(回復) = 1 - exp(-γ × dt)
+    const betaAgent = config.beta;
+    const pInfect = 1 - Math.exp(-betaAgent * dt);
     const pRecover = 1 - Math.exp(-config.gamma * dt);
 
     for (let i = 0; i < agents.length; i++) {

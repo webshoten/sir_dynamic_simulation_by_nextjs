@@ -5,7 +5,7 @@ import type { SirParameters, SirResult } from "../types/sir-analytical-types";
 export interface UseSirRungeKuttaReturn {
   parameters: SirParameters;
   result: SirResult;
-  coefficients: { beta: number; gamma: number; r0: number };
+  coefficients: { betaAnalytical: number; gamma: number; r0: number };
   setContactPerDay: (value: number) => void;
   setInfectionRate: (value: number) => void;
   setRecoveryDays: (value: number) => void;
@@ -13,11 +13,11 @@ export interface UseSirRungeKuttaReturn {
 }
 
 const DEFAULT_PARAMS: SirParameters = {
-  population: 10000,
+  population: 2000, // エージェントベースと統一
   contactPerDay: 10,
-  infectionRate: 0.02,
-  recoveryDays: 14,
-  initialInfected: 10,
+  infectionRate: 3, // % 表記（3% = β_agent 0.03 相当）
+  recoveryDays: 14, // γ ≈ 0.0714（エージェントベースの0.07に近い）
+  initialInfected: 2, // 0.1% (エージェントベースと同じ割合)
   maxDays: 120,
   dt: 1,
 };
