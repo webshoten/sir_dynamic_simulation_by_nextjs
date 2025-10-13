@@ -90,15 +90,20 @@ export function FanNavigation() {
       className="fixed bottom-0 left-0 z-50"
       aria-label="扇形ナビゲーション"
     >
-      <div className="relative w-[400px] h-[400px] pointer-events-none">
+      <section
+        className={`relative w-[400px] h-[400px] ${
+          isExpanded ? 'pointer-events-auto' : 'pointer-events-none'
+        }`}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        aria-label="ナビゲーションメニュー領域"
+      >
         <section
           className="absolute bottom-0 left-0 origin-bottom-left transition-all duration-700 ease-out z-10 pointer-events-auto"
           style={{
             transform: isExpanded ? 'scale(1)' : 'scale(0)',
             opacity: isExpanded ? 1 : 0,
           }}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
           aria-label="扇形メニュー展開エリア"
         >
           <svg
@@ -198,7 +203,6 @@ export function FanNavigation() {
           className="absolute bottom-0 left-0 w-16 h-16 rounded-full bg-transparent transition-all duration-300 hover:scale-105 flex items-center justify-center z-30 pointer-events-auto"
           aria-label="ナビゲーションメニュー"
           onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
         >
           <div
             className="transition-transform duration-500 text-white"
@@ -223,7 +227,7 @@ export function FanNavigation() {
             </svg>
           </div>
         </button>
-      </div>
+      </section>
     </nav>
   );
 }
