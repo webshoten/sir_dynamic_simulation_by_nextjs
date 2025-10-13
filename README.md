@@ -2,6 +2,10 @@
 
 感染症の数理モデル（SIRモデル）のシミュレーション - Next.js実装
 
+[![Deploy with Vercel](https://vercel.com/button)](https://sir-dynamic-simulation-by-nextjs.vercel.app/)
+
+🌐 **Live Demo**: [https://sir-dynamic-simulation-by-nextjs.vercel.app/](https://sir-dynamic-simulation-by-nextjs.vercel.app/)
+
 ## 📊 概要
 
 このプロジェクトは、感染症の広がりをシミュレーションする2つの異なるアプローチを実装しています：
