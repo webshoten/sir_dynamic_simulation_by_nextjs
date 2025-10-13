@@ -2,7 +2,6 @@ import type { RefObject } from "react";
 import { useEffect, useRef } from "react";
 import { createAnimator } from "../logic/animator";
 import { drawChart } from "../logic/draw-chart";
-import { drawMetric } from "../logic/draw-metric";
 import { updatePopulation } from "../logic/update-population";
 import { useSimStore } from "../state/sim-store";
 
@@ -72,10 +71,14 @@ export const useSirAnimation = ({
                         store.config,
                     );
                 }
-                drawMetric(metricsRef.current, s, {
-                    populationN: store.config.populationN,
-                    fatality: store.config.fatality,
-                });
+                // metricsRefにS/I/R情報を色分けして表示
+                if (metricsRef.current) {
+                    const colors = store.config.colors;
+                    metricsRef.current.innerHTML =
+                        `<span style="color: ${colors.S}">S(未感染者): ${s}</span>  <span style="color: ${colors.I}">I(感染者): ${i}</span>  <span style="color: ${colors.R}">R(回復者): ${r}</span>  <span style="color: #ffffff">t=${
+                            _tt.toFixed(1)
+                        }s</span>`;
+                }
             }
         });
 

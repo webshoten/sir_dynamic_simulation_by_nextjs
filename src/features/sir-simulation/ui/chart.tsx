@@ -1,7 +1,6 @@
-/** biome-ignore-all lint/correctness/useUniqueElementIds: <explanation> */
 'use client';
 
-import type { RefObject } from 'react';
+import { type RefObject, useId } from 'react';
 
 export const Chart = ({
   chartCanvasRef,
@@ -10,21 +9,25 @@ export const Chart = ({
   chartCanvasRef: RefObject<HTMLCanvasElement | null>;
   metricsRef: RefObject<HTMLDivElement | null>;
 }) => {
+  const chartWrapId = useId();
+  const chartId = useId();
+  const metricsId = useId();
+
   return (
-    <div id="chart-wrap" className="fixed right-2 bottom-2 z-[5]">
+    <div id={chartWrapId} className="fixed right-2 bottom-2 z-[5]">
       <canvas
-        id="chart"
+        id={chartId}
         ref={chartCanvasRef}
         width={480}
         height={160}
         className="bg-black/50 rounded-md block"
       />
       <div
-        id="metrics"
+        id={metricsId}
         ref={metricsRef}
-        className="text-black font-sans text-[11px] opacity-90 text-right"
+        className="font-mono text-sm text-left bg-black px-2 py-1 rounded"
       >
-        S/I/R 時系列
+        S(未感染者): 0 I(感染者): 0 R(回復者): 0 t=0.0s
       </div>
     </div>
   );

@@ -87,7 +87,7 @@ export function FanNavigation() {
   return (
     <nav
       ref={containerRef}
-      className="fixed bottom-0 left-0 z-50"
+      className="fixed top-0 left-0 z-50"
       aria-label="扇形ナビゲーション"
     >
       <section
@@ -99,7 +99,7 @@ export function FanNavigation() {
         aria-label="ナビゲーションメニュー領域"
       >
         <section
-          className="absolute bottom-0 left-0 origin-bottom-left transition-all duration-700 ease-out z-10 pointer-events-auto"
+          className="absolute top-0 left-0 origin-top-left transition-all duration-700 ease-out z-10 pointer-events-auto"
           style={{
             transform: isExpanded ? 'scale(1)' : 'scale(0)',
             opacity: isExpanded ? 1 : 0,
@@ -117,16 +117,16 @@ export function FanNavigation() {
               <linearGradient
                 id={gradientId}
                 x1="0%"
-                y1="100%"
+                y1="0%"
                 x2="100%"
-                y2="0%"
+                y2="100%"
               >
                 <stop offset="0%" stopColor="rgba(59, 130, 246, 0.95)" />
                 <stop offset="100%" stopColor="rgba(147, 51, 234, 0.85)" />
               </linearGradient>
             </defs>
             <path
-              d={`M 0 400 L ${Math.sin((0 * Math.PI) / 180) * radius} ${400 - Math.cos((0 * Math.PI) / 180) * radius} A ${radius} ${radius} 0 0 1 ${Math.sin((totalAngle * Math.PI) / 180) * radius} ${400 - Math.cos((totalAngle * Math.PI) / 180) * radius} Z`}
+              d={`M 0 0 L ${radius} 0 A ${radius} ${radius} 0 0 1 0 ${radius} Z`}
               fill={`url(#${gradientId})`}
               stroke="rgba(255, 255, 255, 0.2)"
               strokeWidth="2"
@@ -139,8 +139,8 @@ export function FanNavigation() {
           const index = item.displayIndex;
           const angle = (index / (visibleItems.length - 1)) * totalAngle;
           const distance = 240;
-          const x = Math.sin((angle * Math.PI) / 180) * distance;
-          const y = Math.cos((angle * Math.PI) / 180) * distance;
+          const x = Math.cos((angle * Math.PI) / 180) * distance;
+          const y = Math.sin((angle * Math.PI) / 180) * distance;
           const isHovered = hoveredIndex === index;
           const isActive = pathname === item.href;
 
@@ -167,10 +167,10 @@ export function FanNavigation() {
               className="absolute z-20 pointer-events-auto"
               style={{
                 left: `${x + 40}px`,
-                bottom: `${y + 40}px`,
+                top: `${y + 40}px`,
                 transform: isExpanded
-                  ? `translate(-50%, 50%) scale(${isHovered ? 1.15 : 1})`
-                  : 'translate(-50%, 50%) scale(0)',
+                  ? `translate(-50%, -50%) scale(${isHovered ? 1.15 : 1})`
+                  : 'translate(-50%, -50%) scale(0)',
                 opacity: itemOpacity,
                 transition: isExpanded
                   ? `all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.08}s`
@@ -200,7 +200,7 @@ export function FanNavigation() {
 
         <button
           type="button"
-          className="absolute bottom-0 left-0 w-16 h-16 rounded-full bg-transparent transition-all duration-300 hover:scale-105 flex items-center justify-center z-30 pointer-events-auto"
+          className="absolute top-0 left-0 w-16 h-16 rounded-full bg-transparent transition-all duration-300 hover:scale-105 flex items-center justify-center z-30 pointer-events-auto"
           aria-label="ナビゲーションメニュー"
           onMouseEnter={handleMouseEnter}
         >

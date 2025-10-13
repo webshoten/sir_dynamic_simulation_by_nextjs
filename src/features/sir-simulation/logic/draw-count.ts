@@ -15,7 +15,7 @@ export function countSirState(
     return { s, i, r };
 }
 
-// 左上 S/I/Rカウント表示用
+// 左下 S/I/Rカウント表示用
 export function drawCount(
     sCount: number,
     iCount: number,
@@ -34,16 +34,16 @@ export function drawCount(
 
     mainCanvasCtx.save();
     mainCanvasCtx.font = "14px sans-serif";
-    mainCanvasCtx.textBaseline = "top";
+    mainCanvasCtx.textBaseline = "bottom";
     const padding = 8;
     const x = 8;
-    const y = 8;
+    const y = mainCanvasCtx.canvas.height - 8;
     const textWidth = mainCanvasCtx.measureText(fullText).width;
     const textHeight = 16;
     mainCanvasCtx.fillStyle = "rgba(0, 0, 0, 0.5)";
     mainCanvasCtx.fillRect(
         x - padding / 2,
-        y - padding / 2,
+        y - textHeight - padding / 2,
         textWidth + padding,
         textHeight + padding,
     );

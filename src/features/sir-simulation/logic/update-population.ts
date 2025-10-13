@@ -1,12 +1,12 @@
 import type { Agent } from "./agent";
-import { countSirState, drawCount } from "./draw-count";
+import { countSirState } from "./draw-count";
 
 export function updatePopulation(
     agents: Agent[],
     dt: number,
     simTimeSec: number,
     mainCanvas: HTMLCanvasElement,
-    mainCanvasCtx: CanvasRenderingContext2D,
+    _mainCanvasCtx: CanvasRenderingContext2D,
     config: {
         infectionRadius: number;
         beta: number; // betaAgent: 接触あたりの感染率パラメータ
@@ -68,7 +68,8 @@ export function updatePopulation(
     });
 
     const { s, i, r } = countSirState(agents);
-    drawCount(s, i, r, simTimeSec, mainCanvasCtx, config.colors);
+    // drawCount はHTML要素で表示するため、キャンバス上への描画は不要
+    // drawCount(s, i, r, simTimeSec, mainCanvasCtx, config.colors);
     return { s, i, r };
 }
 
