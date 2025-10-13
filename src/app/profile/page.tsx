@@ -83,7 +83,7 @@ export default function ProfilePage() {
                   </h1>
                   <p className="text-xl text-gray-400 mb-4">Hiroyuki Oshima</p>
                   <p className="text-gray-300 mb-6 leading-relaxed">
-                    フルスタックエンジニア・数理モデリング愛好家
+                    フルスタックエンジニア・数理モデリング
                   </p>
 
                   {/* Social Links */}
