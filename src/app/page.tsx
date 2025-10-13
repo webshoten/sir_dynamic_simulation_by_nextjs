@@ -53,7 +53,7 @@ export default function Home() {
 
       <div className="relative z-10">
         {/* Hero Section */}
-        <section className="container mx-auto px-6 pt-20 pb-16">
+        <section className="container mx-auto px-6 pt-16 pb-12">
           <div
             className={`text-center transition-all duration-1000 ${
               mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
@@ -63,15 +63,15 @@ export default function Home() {
               SIR Model Simulation
             </h1>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-              解析的手法と個体ベースの2つのアプローチで
+              感染症の流行を数理的にシミュレーションする基本モデル
               <br />
-              感染症の広がりをシミュレーション
+              人口をS（感受性）・I（感染）・R（回復）の3つのグループに分類し、時間経過を予測
             </p>
           </div>
         </section>
 
         {/* Features Grid */}
-        <section className="container mx-auto px-6 py-12">
+        <section className="container mx-auto px-6 py-6">
           <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-6xl mx-auto">
             {projects.map((project, index) => (
               <Link
