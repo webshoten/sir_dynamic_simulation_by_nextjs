@@ -12,9 +12,6 @@ export const SirTheoryMain = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             SIRモデルのシミュレーション
           </h1>
-          <p className="text-xl text-gray-300">
-            感染症の数理モデルと2つのシミュレーション手法
-          </p>
         </div>
 
         {/* 解析的SIRモデル */}
@@ -124,7 +121,7 @@ export const SirTheoryMain = () => {
         {/* エージェントベースモデル */}
         <section className="mb-12 bg-gray-900/50 rounded-lg p-6 md:p-8">
           <h2 className="text-3xl font-bold text-white mb-6">
-            2. エージェントベースモデル（個体ベースシミュレーション）
+            2. エージェントベースSIRモデル
           </h2>
 
           <div className="mb-6">
@@ -449,10 +446,10 @@ export const SirTheoryMain = () => {
                   <tr className="border-b border-gray-700">
                     <th className="p-4 text-white font-semibold">特徴</th>
                     <th className="p-4 text-blue-400 font-semibold">
-                      解析的モデル
+                      解析的SIRモデル
                     </th>
                     <th className="p-4 text-green-400 font-semibold">
-                      エージェントベースモデル
+                      エージェントベースSIRモデル
                     </th>
                   </tr>
                 </thead>

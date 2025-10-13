@@ -11,9 +11,9 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: 'Top', href: '/' },
   { label: 'プロフィール', href: '/profile' },
-  { label: 'SIR 理論解説', href: '/works/sir-theory' },
-  { label: 'SIR 解析的モデル', href: '/works/sir-analytical' },
-  { label: 'SIR シミュレーション', href: '/works/sir-simulation' },
+  { label: '理論解説', href: '/works/sir-theory' },
+  { label: '解析的SIRモデル', href: '/works/sir-analytical' },
+  { label: 'エージェントベースSIRモデル', href: '/works/sir-simulation' },
 ];
 
 export function FanNavigation() {
@@ -77,7 +77,7 @@ export function FanNavigation() {
   }, [pathname]);
 
   const totalAngle = 90;
-  const radius = 380;
+  const radius = 420;
 
   const visibleItems = Array.from({ length: 5 }, (_, i) => {
     const index = (scrollOffset + i) % navItems.length;
