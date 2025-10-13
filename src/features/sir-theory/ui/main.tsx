@@ -10,7 +10,7 @@ export const SirTheoryMain = () => {
         {/* ヘッダー */}
         <div className="mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            SIRモデルのシミュレーション
+            SIRモデルの理論解説
           </h1>
         </div>
 
