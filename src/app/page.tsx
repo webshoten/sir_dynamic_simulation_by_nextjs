@@ -12,7 +12,7 @@ export default function Home() {
 
   const projects = [
     {
-      title: 'SIR Theory',
+      title: 'SIR 理論解説',
       description: '感染症数理モデルの理論解説',
       longDescription:
         '解析的モデルとエージェントベースモデルの数学的背景、パラメータの関係性を詳しく解説',
@@ -22,7 +22,7 @@ export default function Home() {
       color: 'purple',
     },
     {
-      title: 'SIR Analytical',
+      title: 'SIR 解析的モデル',
       description: '解析的SIRモデル',
       longDescription:
         '常微分方程式を4次ルンゲクッタ法で解く。パラメータを調整してリアルタイムにグラフを確認',
@@ -32,7 +32,7 @@ export default function Home() {
       color: 'blue',
     },
     {
-      title: 'SIR Simulation',
+      title: 'SIR シミュレーション',
       description: 'エージェントベースモデル',
       longDescription:
         '個体レベルのシミュレーション。2次元空間での感染の広がりを視覚的に確認',
@@ -62,9 +62,6 @@ export default function Home() {
             <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               SIR Model Simulation
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-4">
-              感染症の数理モデルを体験する
-            </p>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
               解析的手法とエージェントベースの2つのアプローチで
               <br />

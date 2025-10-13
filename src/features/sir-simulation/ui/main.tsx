@@ -33,6 +33,7 @@ export const SirSimulationMain = () => {
     metricsRef,
   });
 
+  //configだけ監視
   const config = useSimStore((state) => state.config);
 
   return (

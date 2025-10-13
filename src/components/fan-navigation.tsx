@@ -9,11 +9,11 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Profile', href: '/profile' },
-  { label: 'SIR theory', href: '/works/sir-theory' },
-  { label: 'SIR analytical', href: '/works/sir-analytical' },
-  { label: 'SIR simulation', href: '/works/sir-simulation' },
+  { label: 'Top', href: '/' },
+  { label: 'プロフィール', href: '/profile' },
+  { label: 'SIR 理論解説', href: '/works/sir-theory' },
+  { label: 'SIR 解析的モデル', href: '/works/sir-analytical' },
+  { label: 'SIR シミュレーション', href: '/works/sir-simulation' },
 ];
 
 export function FanNavigation() {
