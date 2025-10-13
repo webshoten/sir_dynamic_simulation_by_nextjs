@@ -12,7 +12,7 @@ const navItems: NavItem[] = [
   { label: 'Profile', href: '/profile' },
   { label: 'test1', href: '/test1' },
   { label: 'test2', href: '/test2' },
-  { label: 'test3', href: '/test3' },
+  { label: 'SIR analytical', href: '/works/sir-analytical' },
   { label: 'SIR simulation', href: '/works/sir-simulation' },
 ];
 

@@ -1,0 +1,69 @@
+import { useMemo, useState } from "react";
+import { calculateCoefficients, solveSIR } from "../logic/runge-kutta-solver";
+import type { SirParameters, SirResult } from "../types/sir-analytical-types";
+
+export interface UseSirRungeKuttaReturn {
+  parameters: SirParameters;
+  result: SirResult;
+  coefficients: { beta: number; gamma: number; r0: number };
+  setContactPerDay: (value: number) => void;
+  setInfectionRate: (value: number) => void;
+  setRecoveryDays: (value: number) => void;
+  setInitialInfected: (value: number) => void;
+}
+
+const DEFAULT_PARAMS: SirParameters = {
+  population: 10000,
+  contactPerDay: 10,
+  infectionRate: 0.02,
+  recoveryDays: 14,
+  initialInfected: 10,
+  maxDays: 120,
+  dt: 1,
+};
+
+export function useSirRungeKutta(): UseSirRungeKuttaReturn {
+  const [contactPerDay, setContactPerDay] = useState(
+    DEFAULT_PARAMS.contactPerDay,
+  );
+  const [infectionRate, setInfectionRate] = useState(
+    DEFAULT_PARAMS.infectionRate,
+  );
+  const [recoveryDays, setRecoveryDays] = useState(DEFAULT_PARAMS.recoveryDays);
+  const [initialInfected, setInitialInfected] = useState(
+    DEFAULT_PARAMS.initialInfected,
+  );
+
+  // パラメータオブジェクトを構築
+  const parameters: SirParameters = useMemo(
+    () => ({
+      population: DEFAULT_PARAMS.population,
+      contactPerDay,
+      infectionRate,
+      recoveryDays,
+      initialInfected,
+      maxDays: DEFAULT_PARAMS.maxDays,
+      dt: DEFAULT_PARAMS.dt,
+    }),
+    [contactPerDay, infectionRate, recoveryDays, initialInfected],
+  );
+
+  // 係数（β, γ, R₀）を計算
+  const coefficients = useMemo(
+    () => calculateCoefficients(parameters),
+    [parameters],
+  );
+
+  // SIRモデルを解く
+  const result = useMemo(() => solveSIR(parameters), [parameters]);
+
+  return {
+    parameters,
+    result,
+    coefficients,
+    setContactPerDay,
+    setInfectionRate,
+    setRecoveryDays,
+    setInitialInfected,
+  };
+}
