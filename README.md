@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SIR Model Simulation
 
-## Getting Started
+感染症の数理モデル（SIRモデル）のシミュレーション - Next.js実装
 
-First, run the development server:
+## 📊 概要
+
+このプロジェクトは、感染症の広がりをシミュレーションする2つの異なるアプローチを実装しています：
+
+- **解析的SIRモデル**: 常微分方程式を4次ルンゲクッタ法で数値的に解く
+- **エージェントベースモデル**: 個体レベルの相互作用を空間的にシミュレーション
+
+## 🎬 デモ動画
+
+<!-- 以下のいずれかの方法で動画を追加してください -->
+
+<!-- 方法1: GIF動画 -->
+<!-- ![デモ](./docs/demo.gif) -->
+
+<!-- 方法2: YouTubeリンク -->
+<!-- [![SIRシミュレーション](https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=VIDEO_ID) -->
+
+<!-- 方法3: 動画リンク -->
+<!-- [📹 デモ動画を見る](https://youtube.com/watch?v=...) -->
+
+## ✨ 機能
+
+### 解析的モデル
+- 常微分方程式による正確な計算
+- パラメータの動的調整（接触者数、感染率、回復日数）
+- リアルタイムでのグラフ表示
+- β, γ, R₀の自動計算
+
+### エージェントベースモデル
+- 2次元空間上での個体の動き
+- 接触半径の可視化
+- 確率的感染プロセス（ポアソン過程）
+- リアルタイムチャートとメトリクス表示
+
+### 理論ページ
+- 両モデルの数理的背景
+- パラメータ間の関係性
+- モデル比較表
+- KaTeXによる美しい数式表示
+
+## 🚀 Getting Started
+
+### 開発サーバーの起動
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてください。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### ページ構成
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/works/sir-analytical` - 解析的SIRモデル
+- `/works/sir-simulation` - エージェントベースシミュレーション
+- `/works/sir-theory` - 理論・解説ページ
 
-## Learn More
+## 📐 数理モデル
 
-To learn more about Next.js, take a look at the following resources:
+### 解析的SIRモデル
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+dS/dt = -β S I
+dI/dt = β S I - γ I
+dR/dt = γ I
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### パラメータ
 
-## Deploy on Vercel
+- **β (beta)**: 感染率係数
+- **γ (gamma)**: 回復率 = 1/(回復日数)
+- **R₀**: 基本再生産数 = S(0)β/γ
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### エージェントベースモデル
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 接触半径内の個体が感染リスクを持つ
+- 感染確率: `P(感染) = 1 - exp(-β_agent × dt)`
+- 回復確率: `P(回復) = 1 - exp(-γ × dt)`
+
+## 🛠️ 技術スタック
+
+- **Next.js 15** - Reactフレームワーク
+- **TypeScript** - 型安全性
+- **Tailwind CSS** - スタイリング
+- **Chart.js** - グラフ描画
+- **KaTeX** - 数式表示
+- **Zustand** - 状態管理
+
+## 📚 参考文献
+
+1. [IOP Conference Series (2018)](https://iopscience.iop.org/article/10.1088/1742-6596/1040/1/012021/pdf)
+2. [東北大学 - SIRモデル](https://wagtail.cds.tohoku.ac.jp/coda/python/p-6-application-sup-ode-sir-model.html)
+3. [日本内科学会雑誌 - 感染症の数理モデル (2020)](https://www.naika.or.jp/jsim_wp/wp-content/uploads/2020/11/nichinaishi-109-11-article_4.pdf)
+4. [ルンゲクッタ法](http://pc-physics.com/rk1.html)
+5. [Wikipedia - SIRモデル](https://ja.wikipedia.org/wiki/SIR%E3%83%A2%E3%83%87%E3%83%AB)
+
+## 📄 ライセンス
+
+このプロジェクトはオープンソースです。
+
+## 👤 Author
+
+SDNC hiro
+
+---
+
+Made with ❤️ using Next.js

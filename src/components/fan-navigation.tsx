@@ -11,7 +11,6 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'Profile', href: '/profile' },
-  { label: 'test1', href: '/test1' },
   { label: 'SIR theory', href: '/works/sir-theory' },
   { label: 'SIR analytical', href: '/works/sir-analytical' },
   { label: 'SIR simulation', href: '/works/sir-simulation' },
