@@ -13,7 +13,7 @@ const navItems: NavItem[] = [
   { label: 'プロフィール', href: '/profile' },
   { label: '理論解説', href: '/works/sir-theory' },
   { label: '解析的SIRモデル', href: '/works/sir-analytical' },
-  { label: 'エージェントベースSIRモデル', href: '/works/sir-simulation' },
+  { label: '個体ベースSIRモデル', href: '/works/sir-simulation' },
 ];
 
 export function FanNavigation() {

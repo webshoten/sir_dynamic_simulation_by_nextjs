@@ -29,7 +29,7 @@ export const HudPanel = ({
   const [infectionRadius, setInfectionRadius] = useState(
     config.infectionRadius,
   );
-  // betaAgent: エージェントベースモデルの感染率パラメータ（接触時の感染率）
+  // betaAgent: 個体ベースモデルの感染率パラメータ（接触時の感染率）
   const [betaAgent, setBetaAgent] = useState(config.beta);
   const [gamma, setGamma] = useState(config.gamma);
   const [initI, setInitI] = useState(config.initialInfected);
@@ -132,7 +132,7 @@ export const HudPanel = ({
 
   return (
     <div className="fixed top-2 left-1 right-1 sm:left-auto sm:right-2 bg-black/50 text-white p-2 rounded-md text-[12px] leading-[1.4] font-sans z-10 max-h-[calc(100vh-1rem)] overflow-y-auto">
-      <div className="font-bold mb-2 text-[13px]">エージェントベースモデル</div>
+      <div className="font-bold mb-2 text-[13px]">個体ベースモデル</div>
 
       {/* 人口 */}
       <div className="row my-1 whitespace-nowrap">

@@ -118,10 +118,10 @@ export const SirTheoryMain = () => {
           </div>
         </section>
 
-        {/* エージェントベースモデル */}
+        {/* 個体ベースモデル */}
         <section className="mb-12 bg-gray-900/50 rounded-lg p-6 md:p-8">
           <h2 className="text-3xl font-bold text-white mb-6">
-            2. エージェントベースSIRモデル
+            2. 個体ベースSIRモデル
           </h2>
 
           <div className="mb-6">
@@ -196,7 +196,7 @@ export const SirTheoryMain = () => {
                   </p>
                   <p className="text-gray-400 text-xs mb-3">
                     <span className="font-semibold text-gray-300">目的：</span>
-                    接触半径を持たない解析的SIRモデルとエージェントベースモデルの結果をフィッティングさせるため、接触半径を
+                    接触半径を持たない解析的SIRモデルと個体ベースモデルの結果をフィッティングさせるため、接触半径を
                     40px に設定し、画面サイズに応じてスケーリングする
                   </p>
                   <div className="bg-gray-900 rounded p-3 mt-2 [&_.katex]:text-white">
@@ -267,7 +267,7 @@ export const SirTheoryMain = () => {
               解析的モデルへの換算
             </h3>
             <p className="text-gray-300 mb-4">
-              エージェントベースモデルのパラメータを解析的モデルに換算：
+              個体ベースモデルのパラメータを解析的モデルに換算：
             </p>
             <div className="bg-gray-800 rounded-lg p-6 space-y-4">
               <div>
@@ -358,7 +358,7 @@ export const SirTheoryMain = () => {
               </div>
               <div className="mb-4">
                 <p className="text-white font-semibold mb-2">
-                  エージェントベースモデル：
+                  個体ベースモデル：
                 </p>
                 <div className="bg-gray-900 rounded p-4 [&_.katex]:text-white">
                   <BlockMath math="\beta_{\text{agent}}" />

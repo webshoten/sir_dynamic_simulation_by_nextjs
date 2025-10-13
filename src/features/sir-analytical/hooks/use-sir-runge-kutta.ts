@@ -13,11 +13,11 @@ export interface UseSirRungeKuttaReturn {
 }
 
 const DEFAULT_PARAMS: SirParameters = {
-  population: 2000, // エージェントベースと統一
+  population: 2000, // 個体ベースと統一
   contactPerDay: 10,
   infectionRate: 3, // % 表記（3% = β_agent 0.03 相当）
-  recoveryDays: 14, // γ ≈ 0.0714（エージェントベースの0.07に近い）
-  initialInfected: 2, // 0.1% (エージェントベースと同じ割合)
+  recoveryDays: 14, // γ ≈ 0.0714（個体ベースの0.07に近い）
+  initialInfected: 2, // 0.1% (個体ベースと同じ割合)
   maxDays: 120,
   dt: 1,
 };

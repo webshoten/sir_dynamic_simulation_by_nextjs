@@ -15,7 +15,7 @@ export default function Home() {
       title: 'SIR 理論解説',
       description: '感染症数理モデルの理論解説',
       longDescription:
-        '解析的モデルとエージェントベースモデルの数学的背景、パラメータの関係性を詳しく解説',
+        '解析的モデルと個体ベースモデルの数学的背景、パラメータの関係性を詳しく解説',
       href: '/works/sir-theory',
       icon: '📚',
       gradient: 'from-purple-500 to-pink-500',
@@ -32,8 +32,8 @@ export default function Home() {
       color: 'blue',
     },
     {
-      title: 'SIR シミュレーション',
-      description: 'エージェントベースモデル',
+      title: 'SIR 個体ベースモデル',
+      description: '個体ベースモデル',
       longDescription:
         '個体レベルのシミュレーション。2次元空間での感染の広がりを視覚的に確認',
       href: '/works/sir-simulation',
@@ -63,7 +63,7 @@ export default function Home() {
               SIR Model Simulation
             </h1>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-              解析的手法とエージェントベースの2つのアプローチで
+              解析的手法と個体ベースの2つのアプローチで
               <br />
               感染症の広がりをシミュレーション
             </p>
