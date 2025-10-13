@@ -25,8 +25,6 @@ export function ParameterPanel({ hook }: ParameterPanelProps) {
 
   return (
     <div className="w-full h-full p-6 bg-gray-900/50 rounded-lg overflow-y-auto">
-      <h2 className="text-2xl font-bold text-white mb-6">パラメータ</h2>
-
       {/* 接触者数 */}
       <div className="mb-6">
         <label htmlFor={contactId} className="block text-white mb-2">

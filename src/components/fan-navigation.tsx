@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useId, useRef, useState } from 'react';
 
 interface NavItem {
@@ -17,6 +18,7 @@ const navItems: NavItem[] = [
 ];
 
 export function FanNavigation() {
+  const pathname = usePathname();
   const [isExpanded, setIsExpanded] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [scrollOffset, setScrollOffset] = useState(0);
@@ -64,6 +66,16 @@ export function FanNavigation() {
       container.removeEventListener('wheel', handleWheel);
     };
   }, [isExpanded]);
+
+  // アクティブなページを中央（index 2）に表示
+  useEffect(() => {
+    const activeIndex = navItems.findIndex((item) => item.href === pathname);
+    if (activeIndex !== -1) {
+      // 中央（displayIndex: 2）にアクティブなアイテムを配置
+      const newOffset = (activeIndex - 2 + navItems.length) % navItems.length;
+      setScrollOffset(newOffset);
+    }
+  }, [pathname]);
 
   const totalAngle = 90;
   const radius = 380;
@@ -125,6 +137,7 @@ export function FanNavigation() {
           const x = Math.sin((angle * Math.PI) / 180) * distance;
           const y = Math.cos((angle * Math.PI) / 180) * distance;
           const isHovered = hoveredIndex === index;
+          const isActive = pathname === item.href;
 
           // Creates a gradient: 0 -> 0.6 -> 1 -> 0.6 -> 0
           let edgeFade = 1;
@@ -163,12 +176,15 @@ export function FanNavigation() {
               <span
                 className="text-lg font-semibold whitespace-nowrap block"
                 style={{
-                  color: '#ffffff',
-                  textShadow: isHovered
-                    ? '0 0 20px rgba(255,255,255,0.8), 0 2px 8px rgba(0,0,0,0.8)'
-                    : '0 2px 6px rgba(0,0,0,0.8)',
-                  letterSpacing: isHovered ? '0.05em' : '0',
+                  color: isActive ? '#fbbf24' : '#ffffff',
+                  textShadow: isActive
+                    ? '0 0 25px rgba(251, 191, 36, 0.9), 0 2px 8px rgba(0,0,0,0.8)'
+                    : isHovered
+                      ? '0 0 20px rgba(255,255,255,0.8), 0 2px 8px rgba(0,0,0,0.8)'
+                      : '0 2px 6px rgba(0,0,0,0.8)',
+                  letterSpacing: isHovered || isActive ? '0.05em' : '0',
                   transition: 'all 0.3s ease-out',
+                  fontWeight: isActive ? '700' : '600',
                 }}
               >
                 {item.label}
