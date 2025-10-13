@@ -77,7 +77,7 @@ export function FanNavigation() {
   }, [pathname]);
 
   const totalAngle = 90;
-  const radius = 390;
+  const radius = 380;
 
   const visibleItems = Array.from({ length: 5 }, (_, i) => {
     const index = (scrollOffset + i) % navItems.length;
