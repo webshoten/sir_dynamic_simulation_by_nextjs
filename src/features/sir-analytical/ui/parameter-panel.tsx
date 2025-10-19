@@ -102,7 +102,7 @@ export function ParameterPanel({ hook }: ParameterPanelProps) {
 
         <div className="space-y-3">
           <div className="flex items-center justify-between text-white">
-            <span className="text-gray-300">β (解析的感染率係数):</span>
+            <span className="text-gray-300">β (感染率係数):</span>
             <span className="font-mono font-bold">
               {coefficients.betaAnalytical.toFixed(6)}
             </span>

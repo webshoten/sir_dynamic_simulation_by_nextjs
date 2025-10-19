@@ -108,8 +108,8 @@ export const HudPanel = ({
 
   const estimatedContactPerDay = canvasInfo.contactPerDay;
 
-  // betaAnalytical を計算（解析的モデルとの比較用）
-  // 計算式: β_analytical = (接触者数 / 人口) × β_agent
+  // betaAnalytical を計算（数値解モデルとの比較用）
+  // 計算式: β = (接触者数 / 人口) × β_agent
   const betaAnalytical = useMemo(() => {
     if (popN === 0) return 0;
     return (estimatedContactPerDay / popN) * betaAgent;
@@ -285,10 +285,10 @@ export const HudPanel = ({
 
       {/* 換算値の表示 */}
       <div className="mt-2 pt-2 border-t border-white/20">
-        <div className="font-bold mb-1 text-[11px]">解析モデル換算値</div>
+        <div className="font-bold mb-1 text-[11px]">数値解モデル換算値</div>
         <div className="space-y-1 text-[11px]">
           <div className="flex justify-between">
-            <span className="opacity-80">β (解析的):</span>
+            <span className="opacity-80">β (感染率係数):</span>
             <span className="font-mono font-bold">
               {betaAnalytical.toFixed(6)}
             </span>
@@ -303,7 +303,7 @@ export const HudPanel = ({
           </div>
         </div>
         <div className="text-[10px] opacity-60 mt-1">
-          β解析 = (接触者数/人口) × βエージェント
+          β = (接触者数/人口) × βエージェント
         </div>
       </div>
 

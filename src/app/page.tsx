@@ -22,10 +22,10 @@ export default function Home() {
       color: 'purple',
     },
     {
-      title: 'SIR 解析的モデル',
-      description: '解析的SIRモデル',
+      title: 'SIR 数値解法モデル',
+      description: '数値解法によるSIRモデル',
       longDescription:
-        '常微分方程式を4次ルンゲクッタ法で解く。パラメータを調整してリアルタイムにグラフを確認',
+        '常微分方程式を4次ルンゲクッタ法で数値的に解く。パラメータを調整してリアルタイムにグラフを確認',
       href: '/works/sir-analytical',
       icon: '📈',
       gradient: 'from-blue-500 to-cyan-500',

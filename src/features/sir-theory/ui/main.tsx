@@ -57,7 +57,7 @@ export const SirTheoryMain = () => {
   };
 
   const tocItems = [
-    { id: 'analytical-model', title: '1. 解析的SIRモデル' },
+    { id: 'analytical-model', title: '1. 常微分方程式モデル' },
     { id: 'agent-based-model', title: '2. 個体ベースモデル' },
     { id: 'relationship', title: '3. 両者の関係性' },
     { id: 'references', title: '参考文献' },
@@ -99,14 +99,14 @@ export const SirTheoryMain = () => {
           </h1>
         </div>
 
-        {/* 解析的SIRモデル */}
+        {/* 常微分方程式によるSIRモデル */}
         {/* biome-ignore lint: Navigation target needs static ID for scrolling */}
         <section
           id="analytical-model"
           className="mb-12 bg-gray-900/50 rounded-lg p-6 md:p-8"
         >
           <h2 className="text-3xl font-bold text-white mb-6">
-            1. 解析的SIRモデル（常微分方程式）
+            1. 常微分方程式によるSIRモデル（数値解法）
           </h2>
 
           <div className="mb-6">
@@ -145,13 +145,13 @@ export const SirTheoryMain = () => {
               <div className="text-gray-300">
                 <p className="mb-2">
                   <span className="text-white font-semibold">
-                    2. 解析的感染率係数（
-                    <InlineMath math="\beta_{\text{analytical}}" />
+                    2. 常微分方程式モデルの感染率係数（
+                    <InlineMath math="\beta" />
                     ）：
                   </span>
                 </p>
                 <div className="ml-4 bg-gray-900 rounded p-4 [&_.katex]:text-white">
-                  <BlockMath math="\beta_{\text{analytical}} = \frac{(\text{接触者数}) \times (\text{感染率})}{N}" />
+                  <BlockMath math="\beta = \frac{(\text{接触者数}) \times (\text{感染率})}{N}" />
                   <p className="text-sm text-gray-400 mt-2">
                     ※接触者数、感染率は1日1人あたり
                   </p>
@@ -178,7 +178,7 @@ export const SirTheoryMain = () => {
                   </span>
                 </p>
                 <div className="ml-4 bg-gray-900 rounded p-4 [&_.katex]:text-white">
-                  <BlockMath math="R_0 = \frac{S(0) \beta_{\text{analytical}}}{\gamma}" />
+                  <BlockMath math="R_0 = \frac{S(0) \beta}{\gamma}" />
                   <p className="text-sm text-gray-400 mt-2">
                     ※ S(0)は初期感受性者数（= N - 初期感染者数）
                   </p>
@@ -289,7 +289,7 @@ export const SirTheoryMain = () => {
                   </p>
                   <p className="text-gray-400 text-xs mb-3">
                     <span className="font-semibold text-gray-300">目的：</span>
-                    接触半径を持たない解析的SIRモデルと個体ベースモデルの結果をフィッティングさせるため、接触半径を
+                    接触半径を持たない常微分方程式モデルと個体ベースモデルの結果をフィッティングさせるため、接触半径を
                     40px に設定し、画面サイズに応じてスケーリングする
                   </p>
                   <div className="bg-gray-900 rounded p-3 mt-2 [&_.katex]:text-white">
@@ -306,7 +306,7 @@ export const SirTheoryMain = () => {
                       </p>
                       <p className="text-gray-500 text-xs mb-2">
                         基準画面サイズ（1,049,760
-                        px²）で、解析的モデルとフィッティングするための接触半径を
+                        px²）で、常微分方程式モデルとフィッティングするための接触半径を
                         40px と設定
                       </p>
                       <p className="text-gray-400 text-xs">
@@ -328,7 +328,7 @@ export const SirTheoryMain = () => {
                   </span>
                 </p>
                 <div className="ml-4 text-sm">
-                  <p>解析的モデルと同じ定義（単位時間あたりの回復率）</p>
+                  <p>常微分方程式モデルと同じ定義（単位時間あたりの回復率）</p>
                 </div>
               </div>
             </div>
@@ -357,10 +357,10 @@ export const SirTheoryMain = () => {
 
           <div>
             <h3 className="text-2xl font-semibold text-green-400 mb-4">
-              解析的モデルへの換算
+              常微分方程式モデルへの換算
             </h3>
             <p className="text-gray-300 mb-4">
-              個体ベースモデルのパラメータを解析的モデルに換算：
+              個体ベースモデルのパラメータを常微分方程式モデルに換算：
             </p>
             <div className="bg-gray-800 rounded-lg p-6 space-y-4">
               <div>
@@ -395,10 +395,10 @@ export const SirTheoryMain = () => {
               </div>
               <div>
                 <p className="text-white font-semibold mb-2">
-                  解析的 β への換算：
+                  常微分方程式モデルの β への換算：
                 </p>
                 <div className="bg-gray-900 rounded p-4 [&_.katex]:text-white">
-                  <BlockMath math="\beta_{\text{analytical}} = \frac{\text{接触者数}}{N} \times \beta_{\text{agent}}" />
+                  <BlockMath math="\beta = \frac{\text{接触者数}}{N} \times \beta_{\text{agent}}" />
                 </div>
               </div>
               <div>
@@ -406,7 +406,7 @@ export const SirTheoryMain = () => {
                   回復率 γ（換算不要）：
                 </p>
                 <div className="bg-gray-900 rounded p-4 [&_.katex]:text-white">
-                  <BlockMath math="\gamma_{\text{analytical}} = \gamma_{\text{agent}} = \gamma" />
+                  <BlockMath math="\gamma = \gamma_{\text{agent}}" />
                   <p className="text-sm text-gray-400 mt-2">
                     ※ 回復率は両モデルで同じ定義のため、換算の必要なし
                   </p>
@@ -419,7 +419,7 @@ export const SirTheoryMain = () => {
                   ）：
                 </p>
                 <div className="bg-gray-900 rounded p-4 [&_.katex]:text-white">
-                  <BlockMath math="R_0 = \frac{S(0) \times \beta_{\text{analytical}}}{\gamma}" />
+                  <BlockMath math="R_0 = \frac{S(0) \times \beta}{\gamma}" />
                 </div>
               </div>
             </div>
@@ -445,9 +445,11 @@ export const SirTheoryMain = () => {
             </p>
             <div className="bg-gray-800 rounded-lg p-6">
               <div className="mb-4">
-                <p className="text-white font-semibold mb-2">解析的モデル：</p>
+                <p className="text-white font-semibold mb-2">
+                  常微分方程式モデル：
+                </p>
                 <div className="bg-gray-900 rounded p-4 [&_.katex]:text-white">
-                  <BlockMath math="\beta_{\text{analytical}} = \frac{\text{接触者数} \times \text{感染率}}{N}" />
+                  <BlockMath math="\beta = \frac{\text{接触者数} \times \text{感染率}}{N}" />
                   <p className="text-sm text-gray-400 mt-2">
                     人口全体に対する感染率係数（集団レベル）
                   </p>
@@ -467,7 +469,7 @@ export const SirTheoryMain = () => {
               <div>
                 <p className="text-white font-semibold mb-2">換算式：</p>
                 <div className="bg-gradient-to-r from-blue-900/50 to-green-900/50 rounded p-4 border-2 border-purple-500 [&_.katex]:text-white">
-                  <BlockMath math="\beta_{\text{analytical}} = \frac{\text{接触者数}}{N} \times \beta_{\text{agent}}" />
+                  <BlockMath math="\beta = \frac{\text{接触者数}}{N} \times \beta_{\text{agent}}" />
                   <p className="text-sm text-gray-300 mt-3">
                     接触者数 = 人口密度 × 接触範囲面積 ={' '}
                     <InlineMath math="\frac{N}{A} \times \pi r^2" />
@@ -503,7 +505,7 @@ export const SirTheoryMain = () => {
             </p>
             <div className="bg-gray-800 rounded-lg p-6">
               <div className="bg-gradient-to-r from-blue-900/50 to-green-900/50 rounded p-4 border-2 border-purple-500 [&_.katex]:text-white">
-                <BlockMath math="R_0 = \frac{S(0) \times \beta_{\text{analytical}}}{\gamma}" />
+                <BlockMath math="R_0 = \frac{S(0) \times \beta}{\gamma}" />
                 <div className="mt-4 pt-4 border-t border-purple-400/30">
                   <p className="text-sm text-gray-300 mb-2">
                     <span className="font-semibold text-white">

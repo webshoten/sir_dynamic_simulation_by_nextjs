@@ -12,7 +12,7 @@ const navItems: NavItem[] = [
   { label: 'Top', href: '/' },
   { label: 'プロフィール', href: '/profile' },
   { label: '理論解説', href: '/works/sir-theory' },
-  { label: '解析的SIRモデル', href: '/works/sir-analytical' },
+  { label: '数値解法によるSIRモデル', href: '/works/sir-analytical' },
   { label: '個体ベースSIRモデル', href: '/works/sir-simulation' },
 ];
 

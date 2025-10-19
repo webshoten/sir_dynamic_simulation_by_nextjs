@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'SIR Model Simulation',
   description:
-    '感染症の数理モデルシミュレーション - 解析的モデルと個体ベースモデル',
+    '感染症の数理モデルシミュレーション - 常微分方程式モデル（数値解法）と個体ベースモデル',
 };
 
 export default function RootLayout({
