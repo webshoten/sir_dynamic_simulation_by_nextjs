@@ -16,6 +16,14 @@ type Config = {
   historyMax: number;
 };
 
+/**
+ * 右上に配置されるヒュードパネル
+ *　　シミュレーションの設定を変更するためのUIです。
+ * @param config 設定
+ * @param mainCanvasRef メインキャンバスのref
+ * @param animatorRef アニマーションのref
+ * @returns
+ */
 export const HudPanel = ({
   config,
   mainCanvasRef,

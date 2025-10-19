@@ -29,6 +29,7 @@ type SimState = {
         size: { width: number; height: number },
     ) => void;
     setConfig: (partial: Partial<SimState["config"]>) => void;
+    /** シミュレーション時間（秒）を更新 */
     setSimTimeSec: (t: number) => void;
     pushHistory: (p: HistoryPoint) => void;
     setAgents: (list: Agent[]) => void;

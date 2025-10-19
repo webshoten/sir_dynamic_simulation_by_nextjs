@@ -1,11 +1,96 @@
 'use client';
 
 import 'katex/dist/katex.min.css';
+import { useEffect, useState } from 'react';
 import { BlockMath, InlineMath } from 'react-katex';
 
 export const SirTheoryMain = () => {
+  const [activeSection, setActiveSection] = useState('analytical-model');
+
+  // スクロール監視で現在のセクションをハイライト
+  useEffect(() => {
+    const scrollContainer = document.querySelector('.scroll-container');
+    if (!scrollContainer) return;
+
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('section[id]');
+      let currentSection = '';
+
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+        // セクションが画面上部付近にあるかチェック（上から200px以内）
+        if (rect.top <= 200 && rect.bottom > 200) {
+          currentSection = section.id;
+        }
+      }
+
+      // どのセクションも該当しない場合は、最初に見えているセクションを選択
+      if (!currentSection) {
+        for (const section of sections) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top >= 0 && rect.top <= window.innerHeight) {
+            currentSection = section.id;
+            break;
+          }
+        }
+      }
+
+      if (currentSection && currentSection !== activeSection) {
+        setActiveSection(currentSection);
+      }
+    };
+
+    // 初回実行
+    handleScroll();
+
+    scrollContainer.addEventListener('scroll', handleScroll);
+    return () => {
+      scrollContainer.removeEventListener('scroll', handleScroll);
+    };
+  }, [activeSection]);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const tocItems = [
+    { id: 'analytical-model', title: '1. 解析的SIRモデル' },
+    { id: 'agent-based-model', title: '2. 個体ベースモデル' },
+    { id: 'relationship', title: '3. 両者の関係性' },
+    { id: 'references', title: '参考文献' },
+  ];
+
   return (
-    <div className="fixed inset-0 z-0 overflow-y-auto bg-gradient-to-br from-gray-900 to-gray-800">
+    <div className="scroll-container fixed inset-0 z-0 overflow-y-auto bg-gradient-to-br from-gray-900 to-gray-800">
+      {/* 目次 - 右側固定 */}
+      <nav className="hidden xl:block fixed right-8 top-1/2 -translate-y-1/2 z-10">
+        <div className="bg-gray-800/80 backdrop-blur-sm rounded-lg p-4 shadow-xl border border-gray-700">
+          <h3 className="text-sm font-bold text-gray-400 mb-3 pb-2 border-b border-gray-700">
+            目次
+          </h3>
+          <ul className="space-y-2">
+            {tocItems.map((item) => (
+              <li key={item.id}>
+                <button
+                  type="button"
+                  onClick={() => scrollToSection(item.id)}
+                  className={`text-left text-sm transition-all duration-200 hover:text-white block w-full py-1 px-2 rounded ${
+                    activeSection === item.id
+                      ? 'text-blue-400 font-semibold bg-blue-900/30'
+                      : 'text-gray-400'
+                  }`}
+                >
+                  {item.title}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+
       <div className="max-w-5xl mx-auto p-6 md:p-8 lg:p-12">
         {/* ヘッダー */}
         <div className="mb-8">
@@ -15,7 +100,11 @@ export const SirTheoryMain = () => {
         </div>
 
         {/* 解析的SIRモデル */}
-        <section className="mb-12 bg-gray-900/50 rounded-lg p-6 md:p-8">
+        {/* biome-ignore lint: Navigation target needs static ID for scrolling */}
+        <section
+          id="analytical-model"
+          className="mb-12 bg-gray-900/50 rounded-lg p-6 md:p-8"
+        >
           <h2 className="text-3xl font-bold text-white mb-6">
             1. 解析的SIRモデル（常微分方程式）
           </h2>
@@ -119,7 +208,11 @@ export const SirTheoryMain = () => {
         </section>
 
         {/* 個体ベースモデル */}
-        <section className="mb-12 bg-gray-900/50 rounded-lg p-6 md:p-8">
+        {/* biome-ignore lint: Navigation target needs static ID for scrolling */}
+        <section
+          id="agent-based-model"
+          className="mb-12 bg-gray-900/50 rounded-lg p-6 md:p-8"
+        >
           <h2 className="text-3xl font-bold text-white mb-6">
             2. 個体ベースSIRモデル
           </h2>
@@ -334,7 +427,11 @@ export const SirTheoryMain = () => {
         </section>
 
         {/* 両者の接続と関係性 */}
-        <section className="mb-12 bg-gray-900/50 rounded-lg p-6 md:p-8">
+        {/* biome-ignore lint: Navigation target needs static ID for scrolling */}
+        <section
+          id="relationship"
+          className="mb-12 bg-gray-900/50 rounded-lg p-6 md:p-8"
+        >
           <h2 className="text-3xl font-bold text-white mb-6">
             3. 両者の接続と関係性
           </h2>
@@ -438,7 +535,11 @@ export const SirTheoryMain = () => {
         </section>
 
         {/* 参考文献 */}
-        <section className="bg-gray-900/50 rounded-lg p-6 md:p-8">
+        {/* biome-ignore lint: Navigation target needs static ID for scrolling */}
+        <section
+          id="references"
+          className="bg-gray-900/50 rounded-lg p-6 md:p-8"
+        >
           <h2 className="text-2xl font-bold text-white mb-4">参考文献</h2>
           <div className="space-y-2 text-gray-300 text-sm">
             <p>
