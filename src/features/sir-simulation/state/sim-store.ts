@@ -17,6 +17,8 @@ type SimState = {
         initialInfected: number;
         agentRadius: number;
         fatality: number;
+        minSpeed: number;
+        maxSpeed: number;
         colors: { S: string; I: string; R: string };
         historyMax: number;
     };
@@ -54,6 +56,8 @@ export const useSimStore = create<SimState>((set, get) => ({
         initialInfected: 2,
         agentRadius: 10,
         fatality: 0.02,
+        minSpeed: 0.5,
+        maxSpeed: 2.0,
         colors: {
             S: "hsl(210 80% 60%)",
             I: "hsl(0 80% 60%)",

@@ -12,6 +12,8 @@ type Config = {
   initialInfected: number;
   agentRadius: number;
   fatality: number;
+  minSpeed: number;
+  maxSpeed: number;
   colors: { S: string; I: string; R: string };
   historyMax: number;
 };
@@ -42,6 +44,8 @@ export const HudPanel = ({
   const [gamma, setGamma] = useState(config.gamma);
   const [initI, setInitI] = useState(config.initialInfected);
   const [fatality, setFatality] = useState(config.fatality);
+  const [minSpeed, setMinSpeed] = useState(config.minSpeed);
+  const [maxSpeed, setMaxSpeed] = useState(config.maxSpeed);
 
   // キャンバスサイズを状態として保持（refの変更を検知するため）
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
@@ -79,6 +83,8 @@ export const HudPanel = ({
   const idGamma = `${baseId}-gamma`;
   const idInitI = `${baseId}-initI`;
   const idFatality = `${baseId}-fatality`;
+  const idMinSpeed = `${baseId}-minSpeed`;
+  const idMaxSpeed = `${baseId}-maxSpeed`;
 
   // 接触範囲内の期待人数を推定（接触者数の推定）
   // 計算式: 接触者数 = 人口密度 × 接触範囲の面積
@@ -132,6 +138,8 @@ export const HudPanel = ({
         gamma: Math.max(0, gamma),
         initialInfected: Math.max(0, Math.floor(initI)),
         fatality: Math.min(1, Math.max(0, fatality)),
+        minSpeed: Math.max(0, minSpeed),
+        maxSpeed: Math.max(minSpeed, maxSpeed),
       },
       mainCanvasRef,
       animatorRef,
@@ -247,6 +255,46 @@ export const HudPanel = ({
           className="w-[80px]"
           value={fatality}
           onChange={(e) => setFatality(Number(e.target.value))}
+        />
+      </div>
+
+      {/* 最小速度 */}
+      <div className="row my-1 whitespace-nowrap">
+        <label
+          htmlFor={idMinSpeed}
+          className="inline-block w-[90px] sm:w-[110px]"
+        >
+          最小速度
+        </label>
+        <input
+          id={idMinSpeed}
+          type="number"
+          min={0}
+          max={10}
+          step={0.1}
+          className="w-[80px]"
+          value={minSpeed}
+          onChange={(e) => setMinSpeed(Number(e.target.value))}
+        />
+      </div>
+
+      {/* 最大速度 */}
+      <div className="row my-1 whitespace-nowrap">
+        <label
+          htmlFor={idMaxSpeed}
+          className="inline-block w-[90px] sm:w-[110px]"
+        >
+          最大速度
+        </label>
+        <input
+          id={idMaxSpeed}
+          type="number"
+          min={0}
+          max={10}
+          step={0.1}
+          className="w-[80px]"
+          value={maxSpeed}
+          onChange={(e) => setMaxSpeed(Number(e.target.value))}
         />
       </div>
 

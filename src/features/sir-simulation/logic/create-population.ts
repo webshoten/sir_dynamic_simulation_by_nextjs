@@ -24,6 +24,8 @@ export function createPopulation(
             populationN: number;
             agentRadius: number;
             initialInfected: number;
+            minSpeed: number;
+            maxSpeed: number;
             colors: { S: string; I: string; R: string };
         };
     },
@@ -35,7 +37,7 @@ export function createPopulation(
         const isInfected =
             i < Math.min(config.initialInfected, config.populationN);
         const color = isInfected ? config.colors.I : config.colors.S;
-        const velocity = randomVelocity(0.5, 2.0);
+        const velocity = randomVelocity(config.minSpeed, config.maxSpeed);
         const agent = new Agent(x, y, radius, color, velocity);
         if (isInfected) {
             agent.state = "I";
